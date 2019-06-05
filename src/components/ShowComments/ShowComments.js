@@ -5,7 +5,6 @@ class ShowComment extends Component{
 
   }
 
-
   render(){
     const { allComment } = this.props
     return(

@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import Comment from './components/Comment/Comments'
 import ShowComment from './components/ShowComments/ShowComments'
+import ShowCode from './components/ShowCode/ShowCode'
+import brace from 'brace';
 import AceEditor from 'react-ace';
+
+import 'brace/mode/javascript'
+import "brace/snippets/javascript";
+import 'brace/theme/monokai'
+import 'brace/ext/language_tools';
+
 
 import socketIO from 'socket.io-client';
 
@@ -81,13 +89,22 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state.allComment)
-    const { allComment, comment } = this.state
-    console.log('comment:',comment)
+    const { allComment, comment, string } = this.state
+    console.log('code :',string)
 
     return (
       <div className="App">
-        <AceEditor  value={this.state.string} onChange={this.addCode}/>
+        <AceEditor
+          mode="javascript"
+          theme="monokai"
+          value={this.state.string}
+          onChange={this.addCode}
+          enableLiveAutocompletion={true}
+          highlightActiveLine={true}
+        />
+
+        <ShowCode code={string}/>
+
         <Comment createComment={this.createComment}/>
         <ShowComment allComment={allComment}/>
       </div>
