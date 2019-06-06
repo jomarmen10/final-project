@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
-import { FormControl } from 'react-bootstrap';
+import './ShowCode.css';
+import 'react-bootstrap';
 import vm from 'vm'
+import socketIO from 'socket.io-client';
+const socket = socketIO('http://localhost:3001');
 
 class ShowCode extends Component{
   state={
     codeResult: ''
   }
 
+  componentDidMount(){
+    socket.on('finalRes', data =>{
+      this.setState({
+        codeResult: data.data
+      })
+    })
+  }
 
   handleRun = async(e) => {
     try{
       e.preventDefault();
       const { code } = this.props;
       const result = vm.runInNewContext(code)
+      socket.emit('codeRes', {data: result})
       this.setState({
         codeResult: result
       })
@@ -21,29 +32,20 @@ class ShowCode extends Component{
         codeResult: err
       })
     }
-
-  }
-
-  inputHandler = (e) => {
-    this.setState({
-      [e.currentTarget.name]: e.currentTarget.value
-    })
   }
 
 
   render(){
-    console.log('code return:',this.state.codeResult)
     return(
       <div>
 
-        <input
+        <textarea
           name="codeResult"
-          type="textarea"
           readOnly
+          sz="lg"
           value={this.state.codeResult}
-          onChange={this.inputHandler}
         />
-        <button onClick={this.handleRun}>run</button>
+        <button variant="success" onClick={this.handleRun}>run</button>
 
 
       </div>

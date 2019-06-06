@@ -10,9 +10,9 @@ const Comment = require('./models/Comment')
 const app = express()
 
 const corsOptions = {
-  origin: 'http://localhost:3000', // when you deploy your react app, this is where you put the address,
-  credentials: true, // allowing cookies to be sent with requests from the client (session cookie),
-  optionsSuccessStatus: 200 // some legacy browsers IE11 choke on a 204, and options requests
+  origin: 'http://localhost:3000',
+  credentials: true,
+  optionsSuccessStatus: 200
 }
 
 app.use(express.json());
@@ -29,7 +29,6 @@ server.listen(3001, () => {
 const io = socketIO(server);
 
 io.on('connection', (socket) => {
-  // console.log(socket.id, 'new user connected')
 
   socket.on("new-comment", data=>{
     io.emit('comment', data)
@@ -37,6 +36,10 @@ io.on('connection', (socket) => {
 
   socket.on('addCode', data=>{
     io.emit('resCode', data)
+  })
+
+  socket.on('codeRes', data => {
+    io.emit('finalRes', data)
   })
 
 })

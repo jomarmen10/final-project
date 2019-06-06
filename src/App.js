@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import Comment from './components/Comment/Comments'
 import ShowComment from './components/ShowComments/ShowComments'
 import ShowCode from './components/ShowCode/ShowCode'
-import brace from 'brace';
+import './App.css'
+//ace
 import AceEditor from 'react-ace';
-
 import 'brace/mode/javascript'
 import "brace/snippets/javascript";
 import 'brace/theme/monokai'
 import 'brace/ext/language_tools';
-
-
+//socket
 import socketIO from 'socket.io-client';
-
 const socket = socketIO('http://localhost:3001');
 
 
@@ -31,12 +29,7 @@ class App extends Component {
       })
     })
 
-    // socket.on('connect', socket =>{
-    //   console.log('user connected from client side')
-    // })
-
     socket.on("comment", data => {
-      // console.log(data.data.comment.comment)
       this.setState({
         allComment:[...this.state.allComment, data.data.comment]
       })
@@ -89,11 +82,10 @@ class App extends Component {
 
 
   render() {
-    const { allComment, comment, string } = this.state
-    console.log('code :',string)
-
+    const { allComment, string } = this.state
     return (
       <div className="App">
+
         <AceEditor
           mode="javascript"
           theme="monokai"
@@ -101,6 +93,7 @@ class App extends Component {
           onChange={this.addCode}
           enableLiveAutocompletion={true}
           highlightActiveLine={true}
+          fontSize={15}
         />
 
         <ShowCode code={string}/>
