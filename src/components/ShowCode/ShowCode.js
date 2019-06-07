@@ -37,7 +37,7 @@ class ShowCode extends Component{
   render(){
     return(
       <div>
-        <button className="btn" onClick={this.handleRun}>run</button> <br/>
+        <button className="btn teal grey darken-1" onClick={this.handleRun}>run</button> <br/>
         <textarea
           name="codeResult"
           readOnly

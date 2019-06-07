@@ -42,6 +42,10 @@ io.on('connection', (socket) => {
     io.emit('finalRes', data)
   })
 
+  socket.on('question', data => {
+    io.emit('returnQuestion', data)
+  })
+
 })
 
 

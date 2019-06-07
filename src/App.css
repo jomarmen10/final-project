@@ -13,7 +13,8 @@ input{
   flex-direction: column-reverse;
 }
 
-/* div {
-  border: 1px solid black;
+div .row {
+  /* border: 1px solid black; */
+  margin: 30px 20px;
 
-} */
+}

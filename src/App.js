@@ -19,7 +19,9 @@ class App extends Component {
   state = {
     allComment: [],
     comment: '',
-    string: ''
+    string: '',
+    user: '',
+    emoji: false
   }
 
   componentDidMount(){
@@ -42,6 +44,25 @@ class App extends Component {
     })
   }
 
+  emoji = (info) =>{
+    const { emoji } = this.state
+    {
+      emoji
+      ? (
+        this.setState({
+          emoji: false
+        })
+      )
+      : (
+        this.setState({
+          emoji: true
+        })
+      )
+    }
+
+    console.log('emoji in app')
+  }
+
   createComment = async(info)=>{
     try{
       const printComment = await fetch('http://localhost:3001/', {
@@ -56,9 +77,11 @@ class App extends Component {
       if(newComment.success){
         socket.emit("new-comment", {data:newComment})
         this.setState({
-          comment: newComment.comment
+          comment: newComment.comment,
+          emoji: false
         })
       }
+
     }catch(err){
       return err
     }
@@ -79,8 +102,6 @@ class App extends Component {
   addCode = (e) =>{
     socket.emit('addCode', {data: e})
   }
-
-
 
   render() {
     const { allComment, string } = this.state
@@ -103,7 +124,7 @@ class App extends Component {
           <div id='messages' className="input-field col s10" >
             <ShowComment allComment={allComment}/>
           </div>
-          <Comment createComment={this.createComment}/>
+          <Comment createComment={this.createComment} emoji={this.emoji} isEmoji={this.state.emoji}/>
         </div>
 
         <div className="col s3">

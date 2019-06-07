@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Emoji from '../Emoji/Emoji'
 //emoji
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
@@ -8,7 +9,8 @@ import { Picker } from 'emoji-mart'
 
 class Comment extends Component{
   state = {
-    comment: ''
+    comment: '',
+
   }
 
   inputHandler = (e) => {
@@ -37,42 +39,47 @@ class Comment extends Component{
     this.submitHandler()
   }
 
-  handleClose = () => {
-    this.setState({ show: false });
+  emojiOnOff = () => {
+    this.props.emoji()
   }
 
-  handleShow = (e) => {
-    this.setState({
-      show: true,
-      [e.currentTarget.name]: e.currentTarget.value
-     })
-  }
+
+
 
   render(){
-    console.log('native:', this.state.comment)
-    const { comment } = this.state
+    const { comment, emoji } = this.state
+    const { isEmoji } = this.props
     return(
       <>
-        {/* <Picker
-          set='facebook'
-          emoji='call_me_hand'
-          style={{ position: 'absolute', bottom: '20px', right: '20px' }}
-          onClick={this.emojiHandler}
-        /> */}
+        {
+          isEmoji
+            ? (
+              <Picker
+                set='google'
+                emoji='call_me_hand'
+                style={{ position: 'absolute', bottom: '20px', right: '20px' }}
+                onClick={this.emojiHandler}
+              />
+            )
+            : null
+        }
+        <button onClick={this.emojiOnOff}>emoji</button>
 
-        <div class="row">
-          <div class="input-field col s8">
+        <div className="row">
+          <div className="input-field col s8">
             <form onSubmit={this.submitHandler}>
-              <i class="material-icons prefix">mode_edit</i>
               <input
                 id="icon_prefix2"
                 type='text'
-                class="materialize-textarea"
+                className="materialize-textarea"
                 name='comment'
                 placeholder='Message'
                 value={comment}
                 onChange={this.inputHandler}>
               </input>
+
+              <i className="material-icons prefix">insert_emoticon</i>
+
             </form>
 
           </div>
