@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './ShowCode.css';
-import 'react-bootstrap';
 import vm from 'vm'
 import socketIO from 'socket.io-client';
 const socket = socketIO('http://localhost:3001');
@@ -38,16 +37,13 @@ class ShowCode extends Component{
   render(){
     return(
       <div>
-
+        <button className="btn" onClick={this.handleRun}>run</button> <br/>
         <textarea
           name="codeResult"
           readOnly
           sz="lg"
           value={this.state.codeResult}
         />
-        <button variant="success" onClick={this.handleRun}>run</button>
-
-
       </div>
     )
   }

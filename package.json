@@ -8,6 +8,7 @@
     "dotenv": "^8.0.0",
     "emoji-mart": "^2.11.1",
     "express": "^4.17.1",
+    "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.5.12",
     "react": "^16.8.6",
     "react-ace": "^7.0.1",

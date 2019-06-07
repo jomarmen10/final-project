@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import Comment from './components/Comment/Comments'
 import ShowComment from './components/ShowComments/ShowComments'
 import ShowCode from './components/ShowCode/ShowCode'
+import Footer from './components/Footer/Footer'
+import Questions from './components/Questions/Questions'
 import './App.css'
 //ace
 import AceEditor from 'react-ace';
 import 'brace/mode/javascript'
 import "brace/snippets/javascript";
-import 'brace/theme/monokai'
+import 'brace/theme/tomorrow_night_eighties'
 import 'brace/ext/language_tools';
 //socket
 import socketIO from 'socket.io-client';
 const socket = socketIO('http://localhost:3001');
-
-
 
 class App extends Component {
   state = {
@@ -81,25 +81,35 @@ class App extends Component {
   }
 
 
+
   render() {
     const { allComment, string } = this.state
     return (
-      <div className="App">
+      <div className="row">
+        <div className="col s6">
+          <AceEditor
+            mode="javascript"
+            theme="tomorrow_night_eighties"
+            value={this.state.string}
+            onChange={this.addCode}
+            enableLiveAutocompletion={true}
+            highlightActiveLine={true}
+            fontSize={15}
+          />
+          <ShowCode code={string}/>
+        </div>
 
-        <AceEditor
-          mode="javascript"
-          theme="monokai"
-          value={this.state.string}
-          onChange={this.addCode}
-          enableLiveAutocompletion={true}
-          highlightActiveLine={true}
-          fontSize={15}
-        />
+        <div className="col s3">
+          <div id='messages' className="input-field col s10" >
+            <ShowComment allComment={allComment}/>
+          </div>
+          <Comment createComment={this.createComment}/>
+        </div>
 
-        <ShowCode code={string}/>
-
-        <Comment createComment={this.createComment}/>
-        <ShowComment allComment={allComment}/>
+        <div className="col s3">
+          <Questions/>
+        </div>
+        <Footer />
       </div>
     );
   }

@@ -9,15 +9,10 @@ class ShowComment extends Component{
     const { allComment } = this.props
     return(
       <div>
-        <h1>show input</h1>
 
-        {/* <textarea> */}
-          {allComment.map((c,i) => {
-            return <h1 key={i}>{c.comment}</h1>
-          })}
-
-          {/* </textarea> */}
-
+        {allComment.map((c,i) => {
+          return <p key={i}>{c.comment}</p>
+        })}
       </div>
     )
   }

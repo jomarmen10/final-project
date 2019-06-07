@@ -4,16 +4,7 @@ import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
 
 
-const customEmojis = [
-  {
-    name: 'Octocat',
-    short_names: ['octocat'],
-    text: '',
-    emoticons: [],
-    keywords: ['github'],
-    imageUrl: process.env.PORT 
-  }
-]
+
 
 class Comment extends Component{
   state = {
@@ -46,19 +37,47 @@ class Comment extends Component{
     this.submitHandler()
   }
 
+  handleClose = () => {
+    this.setState({ show: false });
+  }
+
+  handleShow = (e) => {
+    this.setState({
+      show: true,
+      [e.currentTarget.name]: e.currentTarget.value
+     })
+  }
+
   render(){
     console.log('native:', this.state.comment)
     const { comment } = this.state
     return(
-      <div>
-        <h1>input text</h1>
-        <Picker custom={customEmojis} set='facebook' emoji='call_me_hand' style={{ position: 'absolute', bottom: '20px', right: '20px' }} onClick={this.emojiHandler} />
+      <>
+        {/* <Picker
+          set='facebook'
+          emoji='call_me_hand'
+          style={{ position: 'absolute', bottom: '20px', right: '20px' }}
+          onClick={this.emojiHandler}
+        /> */}
 
-        <form onSubmit={this.submitHandler}>
-          <input type='text' name='comment' placeholder='enter text' value={comment} onChange={this.inputHandler}></input>
-          <button type='Submit'>Submit</button>
-        </form>
-      </div>
+        <div class="row">
+          <div class="input-field col s8">
+            <form onSubmit={this.submitHandler}>
+              <i class="material-icons prefix">mode_edit</i>
+              <input
+                id="icon_prefix2"
+                type='text'
+                class="materialize-textarea"
+                name='comment'
+                placeholder='Message'
+                value={comment}
+                onChange={this.inputHandler}>
+              </input>
+            </form>
+
+          </div>
+        </div>
+      </>
     )
   }
 }
