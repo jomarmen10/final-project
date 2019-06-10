@@ -31,6 +31,7 @@ class App extends Component {
 
   componentDidMount(){
     this.getComments().then(res =>{
+      console.log(res)
       this.setState({
         allComment: res.allcomment
       })
@@ -38,10 +39,8 @@ class App extends Component {
     })
 
     socket.on("comment", data => {
-      console.log(...this.state.allComment)
-      console.log(data.data.comment)
       this.setState({
-        allComment:[...this.state.allComment, data.data.comment]
+        allComment:[...(this.state.allComment || []), data.data.comment]
       },()=>{
         this.updateScroll()
       })
