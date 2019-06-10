@@ -22,8 +22,8 @@ app.use(cors(corsOptions));
 
 const server = http.Server(app);
 
-server.listen(3001, () => {
-  console.log('listening to port:', 3001)
+server.listen(process.env.PORT || 3001, () => {
+  console.log('listening to port:', process.env.PORT)
 })
 
 const io = socketIO(server);
