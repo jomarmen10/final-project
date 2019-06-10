@@ -11,7 +11,7 @@ const Comment = require('./models/Comment')
 const app = express()
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://code-bud.herokuapp.com',
   credentials: true,
   optionsSuccessStatus: 200
 }
