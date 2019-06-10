@@ -15,7 +15,10 @@ import 'brace/theme/tomorrow_night_eighties'
 import 'brace/ext/language_tools';
 //socket
 import socketIO from 'socket.io-client';
-const socket = socketIO('http://localhost:3001');
+//for local development
+// const socket = socketIO('http://localhost:3001');
+//for heroku
+const socket = socketIO('https://code-bud.herokuapp.com/');
 
 class App extends Component {
   state = {
