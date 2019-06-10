@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+// import { Switch, Route } from 'react-router-dom';
 import Comment from './components/Comment/Comments'
 import ShowComment from './components/ShowComments/ShowComments'
 import ShowCode from './components/ShowCode/ShowCode'
 import Footer from './components/Footer/Footer'
 import Questions from './components/Questions/Questions'
+import GetUser from './components/GetUser/GetUser'
 import './App.css'
 //ace
 import AceEditor from 'react-ace';
@@ -29,17 +31,26 @@ class App extends Component {
       this.setState({
         allComment: res.allcomment
       })
+
     })
 
     socket.on("comment", data => {
       this.setState({
         allComment:[...this.state.allComment, data.data.comment]
+      },()=>{
+        this.updateScroll()
       })
     })
 
     socket.on('resCode', data =>{
       this.setState({
         string: data.data
+      })
+    })
+
+    socket.on('new-Delcomment', data => {
+      this.setState({
+        allComment: [data.data.deleteDb]
       })
     })
   }
@@ -81,7 +92,7 @@ class App extends Component {
           emoji: false
         })
       }
-
+      await this.updateScroll()
     }catch(err){
       return err
     }
@@ -94,6 +105,7 @@ class App extends Component {
       })
       const resComments = await allComments.json()
       return resComments
+
     }catch(err){
       return err
     }
@@ -103,11 +115,22 @@ class App extends Component {
     socket.emit('addCode', {data: e})
   }
 
+  updateScroll = () => {
+    this.refs.messageWindow.scrollTop = this.refs.messageWindow.scrollHeight
+  }
+// //add user function
+//   addUser = (info) => {
+//     this.setState({
+//       user: info
+//     })
+//   }
+
   render() {
     const { allComment, string } = this.state
     return (
       <div className="row">
-        <div className="col s6">
+        {/* <GetUser addUser={this.addUser}/> */}
+        <div className="col s5.9">
           <AceEditor
             mode="javascript"
             theme="tomorrow_night_eighties"
@@ -121,10 +144,10 @@ class App extends Component {
         </div>
 
         <div className="col s3">
-          <div id='messages' className="input-field col s10" >
+          <div id='messages' className="input-field col s10" ref="messageWindow">
             <ShowComment allComment={allComment}/>
           </div>
-          <Comment createComment={this.createComment} emoji={this.emoji} isEmoji={this.state.emoji}/>
+          <Comment getComments={this.getComments} createComment={this.createComment} emoji={this.emoji} isEmoji={this.state.emoji}/>
         </div>
 
         <div className="col s3">

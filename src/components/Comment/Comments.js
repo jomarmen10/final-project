@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import Emoji from '../Emoji/Emoji'
+
 //emoji
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
+//socket
+import socketIO from 'socket.io-client';
+const socket = socketIO('http://localhost:3001');
 
 
 
@@ -34,7 +37,7 @@ class Comment extends Component{
   emojiHandler = (e) => {
     console.log(e)
     this.setState({
-      comment: e.native
+      comment: this.state.comment + e.native
     })
     this.submitHandler()
   }
@@ -44,10 +47,24 @@ class Comment extends Component{
   }
 
 
+  clearChat = async() => {
+    try{
+      const deleteComment = await fetch('http://localhost:3001/', {
+        method: 'DELETE',
+        credentials: 'include'
+      })
+      const delComment = await deleteComment.json();
+      if(delComment.deleted){
+        socket.emit('del-comment', {data:delComment})
+      }
+    }catch(err){
+      return err
+    }
+  }
 
 
   render(){
-    const { comment, emoji } = this.state
+    const { comment } = this.state
     const { isEmoji } = this.props
     return(
       <>
@@ -63,10 +80,11 @@ class Comment extends Component{
             )
             : null
         }
-        <button onClick={this.emojiOnOff}>emoji</button>
+        <button className='grey darken-1 btn-small' onClick={this.emojiOnOff}><i className="material-icons prefix">insert_emoticon</i></button>
 
-        <div className="row">
-          <div className="input-field col s8">
+        <button className="grey darken-1 btn-small" onClick={this.clearChat}>Clear Chat</button>
+
+          <div className="input-field col s10">
             <form onSubmit={this.submitHandler}>
               <input
                 id="icon_prefix2"
@@ -77,13 +95,10 @@ class Comment extends Component{
                 value={comment}
                 onChange={this.inputHandler}>
               </input>
-
-              <i className="material-icons prefix">insert_emoticon</i>
-
             </form>
 
           </div>
-        </div>
+
       </>
     )
   }

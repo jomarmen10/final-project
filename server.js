@@ -46,12 +46,15 @@ io.on('connection', (socket) => {
     io.emit('returnQuestion', data)
   })
 
+  socket.on('del-comment', data => {
+    io.emit('new-Delcomment', data)
+  })
 })
 
 
 app.get('/', async(req, res) =>{
   try {
-    allcomment = await Comment.find({})
+    const allcomment = await Comment.find({})
     res.json({
       success: true,
       allcomment
@@ -63,10 +66,22 @@ app.get('/', async(req, res) =>{
 
 app.post('/', async(req,res) => {
   try{
-    comment = await Comment.create(req.body)
+    const comment = await Comment.create(req.body)
     res.json({
       success:true,
       comment
+    })
+  }catch(err){
+    return err
+  }
+})
+
+app.delete('/', async(req, res) => {
+  try {
+    const deleteDb = await Comment.remove({})
+    res.json({
+      deleted:true,
+      deleteDb
     })
   }catch(err){
     return err

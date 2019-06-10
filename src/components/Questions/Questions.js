@@ -18,19 +18,26 @@ class Questions extends Component{
   }
 
   changeQuestion = () => {
-
     this.setState({
       question: question[Math.floor(Math.random() * question.length)]
     })
     socket.emit('question', {data: question[Math.floor(Math.random() * question.length)]})
+  }
 
+  delQuestion = () => {
+    this.setState({
+      question: ""
+    })
+    socket.emit('question', {data: ""})
   }
 
 
   render(){
     return(
       <div>
-        <button className="grey darken-1 btn" onClick={this.changeQuestion}>Random Questions</button> <br/>
+        <button className="grey darken-1 btn" onClick={this.changeQuestion}>Questions</button>
+        <button className="grey darken-1 btn-floating" onClick={this.delQuestion}>X</button> <br/>
+
         <h5>{this.state.question}</h5>
       </div>
     )

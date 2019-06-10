@@ -9,12 +9,13 @@ input{
   border: 1px solid black;
   overflow-wrap: break-word;
   overflow-y: scroll;
-  display: flex;
-  flex-direction: column-reverse;
 }
 
-div .row {
-  /* border: 1px solid black; */
-  margin: 30px 20px;
+button {
+  color: white;
+}
 
+div .row{
+  /* border: 1px solid black; */
+  margin: 30px 20px 30px 60px;
 }

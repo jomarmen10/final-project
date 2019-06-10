@@ -7,7 +7,7 @@ class Footer extends Component{
       <div >
         <div className="row"/>
           <footer className="container">
-            © 2019 Code Buddy by Jomar Mendoza
+            © 2019 Code Buddy by <strong>Jomar Mendoza</strong>
           </footer>
       </div>
     )
