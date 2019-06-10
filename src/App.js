@@ -38,6 +38,8 @@ class App extends Component {
     })
 
     socket.on("comment", data => {
+      console.log(...this.state.allComment)
+      console.log(data.data.comment)
       this.setState({
         allComment:[...this.state.allComment, data.data.comment]
       },()=>{
