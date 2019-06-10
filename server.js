@@ -2,7 +2,8 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 const cors = require('cors');
-
+const path = require('path')
+const PORT = process.env.PORT || 3001;
 
 require('./db/db')
 const Comment = require('./models/Comment')
@@ -22,8 +23,10 @@ app.use(cors(corsOptions));
 
 const server = http.Server(app);
 
-server.listen(process.env.PORT || 3001, () => {
-  console.log('listening to port:', process.env.PORT)
+
+
+server.listen(process.env.PORT || PORT, () => {
+  console.log('listening to port:', PORT)
 })
 
 const io = socketIO(server);
@@ -87,3 +90,10 @@ app.delete('/', async(req, res) => {
     return err
   }
 })
+
+
+if(process.env.NODE_ENV === 'production'){
+  app.get('/*', (req, res) =>{
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  })
+}
