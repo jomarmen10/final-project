@@ -55,6 +55,13 @@ io.on('connection', (socket) => {
 })
 
 
+if(process.env.NODE_ENV === 'production'){
+  app.get('/*', (req, res) =>{
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  })
+}
+
+
 app.get('/', async(req, res) =>{
   try {
     const allcomment = await Comment.find({})
@@ -90,10 +97,3 @@ app.delete('/', async(req, res) => {
     return err
   }
 })
-
-
-if(process.env.NODE_ENV === 'production'){
-  app.get('/*', (req, res) =>{
-    res.sendFile(path.join(__dirname, 'build', 'index.html'))
-  })
-}
