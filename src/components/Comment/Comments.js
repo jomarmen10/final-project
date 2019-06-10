@@ -5,7 +5,10 @@ import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
 //socket
 import socketIO from 'socket.io-client';
-const socket = socketIO('http://localhost:3001');
+//dev
+// const socket = socketIO('http://localhost:3001');
+//for heroku
+const socket = socketIO('https://code-bud.herokuapp.com');
 
 
 
@@ -49,7 +52,7 @@ class Comment extends Component{
 
   clearChat = async() => {
     try{
-      const deleteComment = await fetch('http://localhost:3001/', {
+      const deleteComment = await fetch('https://code-bud.herokuapp.com', {
         method: 'DELETE',
         credentials: 'include'
       })

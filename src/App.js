@@ -18,7 +18,7 @@ import socketIO from 'socket.io-client';
 //for local development
 // const socket = socketIO('http://localhost:3001');
 //for heroku
-const socket = socketIO('https://code-bud.herokuapp.com/');
+const socket = socketIO('https://code-bud.herokuapp.com');
 
 class App extends Component {
   state = {
@@ -79,7 +79,7 @@ class App extends Component {
 
   createComment = async(info)=>{
     try{
-      const printComment = await fetch('http://localhost:3001/', {
+      const printComment = await fetch('https://code-bud.herokuapp.com', {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify(info),
@@ -103,7 +103,7 @@ class App extends Component {
 
   getComments = async() => {
     try{
-      const allComments = await fetch('http://localhost:3001/', {
+      const allComments = await fetch('https://code-bud.herokuapp.com', {
         credentials: 'include'
       })
       const resComments = await allComments.json()

@@ -12,6 +12,7 @@ const app = express()
 
 const corsOptions = {
   origin: 'https://code-bud.herokuapp.com',
+  // origin: 3000,
   credentials: true,
   optionsSuccessStatus: 200
 }
