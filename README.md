@@ -24,3 +24,6 @@ Preview: ![preview](https://raw.githubusercontent.com/jomarmen10/jomarmen10.gith
 * For user to create its own private room
 * Have more than one language
 * Ranking system
+
+## Live Demo
+(https://code-bud.herokuapp.com/)
