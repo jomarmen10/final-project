@@ -132,33 +132,45 @@ class App extends Component {
   render() {
     const { allComment, string } = this.state
     return (
-      <div className="row">
-        {/* <GetUser addUser={this.addUser}/> */}
-        <div className="col s5.9">
-          <AceEditor
-            mode="javascript"
-            theme="tomorrow_night_eighties"
-            value={this.state.string}
-            onChange={this.addCode}
-            enableLiveAutocompletion={true}
-            highlightActiveLine={true}
-            fontSize={15}
-          />
-          <ShowCode code={string}/>
-        </div>
-
-        <div className="col s3">
-          <div id='messages' className="input-field col s10" ref="messageWindow">
-            <ShowComment allComment={allComment}/>
+      <>
+      <div className="top-padding"></div>
+      <div className="container">
+        <div className="row">
+          {/* <GetUser addUser={this.addUser}/> */}
+          <div className="col-6">
+            <AceEditor
+              mode="javascript"
+              theme="tomorrow_night_eighties"
+              value={this.state.string}
+              onChange={this.addCode}
+              enableLiveAutocompletion={true}
+              highlightActiveLine={true}
+              fontSize={15}
+            />
+            <ShowCode code={string}/>
           </div>
-          <Comment getComments={this.getComments} createComment={this.createComment} emoji={this.emoji} isEmoji={this.state.emoji}/>
-        </div>
 
-        <div className="col s3">
-          <Questions/>
+          <div className="col-3">
+            <div id='messages' className="input-field col s10" ref="messageWindow">
+              <ShowComment allComment={allComment}/>
+            </div>
+            <Comment getComments={this.getComments} createComment={this.createComment} emoji={this.emoji} isEmoji={this.state.emoji}/>
+          </div>
+
+          <div className="col-3">
+            <Questions/>
+          </div>
         </div>
-        <Footer />
       </div>
+
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <Footer/>
+          </div>
+        </div>
+      </div>
+      </>
     );
   }
 }
