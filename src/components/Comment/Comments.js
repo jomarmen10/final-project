@@ -83,9 +83,10 @@ class Comment extends Component{
             )
             : null
         }
+        <button className="grey darken-1 btn-small" onClick={this.clearChat}>Clear Chat</button>
+
         <button className='grey darken-1 btn-small' onClick={this.emojiOnOff}><i className="material-icons prefix">insert_emoticon</i></button>
 
-        <button className="grey darken-1 btn-small" onClick={this.clearChat}>Clear Chat</button>
 
           <div className="input-field col s10">
             <form onSubmit={this.submitHandler}>

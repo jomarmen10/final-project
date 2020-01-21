@@ -34,11 +34,11 @@ class Questions extends Component{
 
   render(){
     return(
-      <div>
+      <div className="question">
         <button className="grey darken-1 btn" onClick={this.changeQuestion}>Questions</button>
         <button className="grey darken-1 btn-floating" onClick={this.delQuestion}>X</button> <br/>
 
-        <h5>{this.state.question}</h5>
+        <p>{this.state.question}</p>
       </div>
     )
   }

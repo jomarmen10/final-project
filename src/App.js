@@ -133,11 +133,10 @@ class App extends Component {
     const { allComment, string } = this.state
     return (
       <>
-      <div className="top-padding"></div>
-      <div className="container">
+      <div className="container top-padding">
         <div className="row">
           {/* <GetUser addUser={this.addUser}/> */}
-          <div className="col-6">
+          <div className="col">
             <AceEditor
               mode="javascript"
               theme="tomorrow_night_eighties"
@@ -150,7 +149,7 @@ class App extends Component {
             <ShowCode code={string}/>
           </div>
 
-          <div className="col-3">
+          <div className="col">
             <div id='messages' className="input-field col s10" ref="messageWindow">
               <ShowComment allComment={allComment}/>
             </div>
@@ -160,15 +159,12 @@ class App extends Component {
           <div className="col-3">
             <Questions/>
           </div>
+          
         </div>
       </div>
 
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <Footer/>
-          </div>
-        </div>
+      <div className="footer">
+        <Footer/>
       </div>
       </>
     );
