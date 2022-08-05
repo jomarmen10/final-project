@@ -12,7 +12,7 @@
     "lodash": "^4.17.15",
     "lodash.template": "^4.5.0",
     "materialize-css": "^1.0.0-rc.2",
-    "mongoose": "^5.5.12",
+    "mongoose": "^5.7.5",
     "react": "^16.8.6",
     "react-ace": "^7.0.1",
     "react-bootstrap": "^1.0.0-beta.9",
