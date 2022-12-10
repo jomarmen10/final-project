@@ -8,7 +8,7 @@
     "dotenv": "^8.0.0",
     "emoji-mart": "^2.11.1",
     "eslint-utils": "^1.4.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "lodash": "^4.17.15",
     "lodash.template": "^4.5.0",
     "materialize-css": "^1.0.0-rc.2",
